@@ -1,5 +1,5 @@
 ﻿using System;
-namespace TechJobsOO
+namespace TechJobsOONS
 {
     public class Job
     {
@@ -14,6 +14,78 @@ namespace TechJobsOO
 
         // TODO: Add the two necessary constructors.
 
+        public Job()
+        {
+            Id = nextId;
+            nextId++;
+        }
+
+        public Job(string name, Employer employerName, Location employerLocation, PositionType jobType, CoreCompetency jobCoreCompetency) : this()
+        {
+            Name = name;
+            EmployerName = employerName;
+            EmployerLocation = employerLocation;
+            JobType = jobType;
+            JobCoreCompetency = jobCoreCompetency;
+        }
+
         // TODO: Generate Equals() and GetHashCode() methods.
+
+        public override bool Equals(object obj)
+        {
+            return obj is Job job &&
+                   Id == job.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
+
+        public override string ToString()
+        {
+            if (Name == null && EmployerName == null && EmployerLocation == null && JobType == null && JobCoreCompetency == null)
+            {
+                return "\nOOPS! This job does not seem to exist.\n";
+            }
+            else if (Name == "" || EmployerName.Value == "" || EmployerLocation.Value == "" || JobType.Value == "" || JobCoreCompetency.Value == "")
+            {
+                if (Name == "")
+                {
+                    Name = "Data not available";
+                }
+                if (EmployerName.Value == "")
+                {
+                    EmployerName.Value = "Data not available";
+                }
+                if (EmployerLocation.Value == "")
+                {
+                    EmployerLocation.Value = "Data not available";
+                }
+                if (JobType.Value == "")
+                {
+                    JobType.Value = "Data not available";
+                }
+                if (JobCoreCompetency.Value == "")
+                {
+                    JobCoreCompetency.Value = "Data not available";
+                }
+                return "\nID: " + Id +
+                    "\nName: " + Name +
+                    "\nEmployer: " + EmployerName +
+                    "\nLocation: " + EmployerLocation +
+                    "\nPosition Type: " + JobType +
+                    "\nCore Competency: " + JobCoreCompetency + "\n";
+            }
+            else
+            {
+                return "\nID: " + Id +
+                    "\nName: " + Name +
+                    "\nEmployer: " + EmployerName +
+                    "\nLocation: " + EmployerLocation +
+                    "\nPosition Type: " + JobType +
+                    "\nCore Competency: " + JobCoreCompetency + "\n";
+            }
+        }
     }
 }
